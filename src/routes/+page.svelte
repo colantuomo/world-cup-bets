@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { fade, blur, fly, slide, scale } from 'svelte/transition';
+	import { fade } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
 	import { onMount } from 'svelte';
 	import { Moon } from 'svelte-loading-spinners';
@@ -7,6 +7,7 @@
 	import GroupLabel from '../components/groupLabel.svelte';
 	import { initializeFirebase } from '../lib/firebase';
 	import type { User } from 'firebase/auth';
+	import logo from '$lib/images/logo.png';
 
 	export let data: MatchesData;
 	const { auth } = initializeFirebase();
@@ -33,7 +34,7 @@
 </svelte:head>
 
 {#if !currentUser}
-	<div class="container mx-auto flex justify-center pt-60 absolute">
+	<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
 		<div transition:fade={{ delay: 250, duration: 1500, easing: quintOut }}>
 			<Moon />
 		</div>
@@ -43,9 +44,10 @@
 		transition:fade={{ delay: 250, duration: 1500, easing: quintOut }}
 		class="container mx-auto px-4"
 	>
-		<div class="py-4">
-			<h1 class="text-3xl text-center font-bold">Daniel do Bets</h1>
-			<h2 class="text-lg text-center font-semibold">{currentUser?.displayName}</h2>
+		<div class="flex flex-col items-center py-4">
+			<!-- <h1 class="text-3xl text-center font-bold">Daniel do Bets</h1> -->
+			<img class="w-32" alt="Main logo" src={logo} />
+			<h2 class="text-lg text-center font-semibold text-gray-500">{currentUser?.displayName}</h2>
 		</div>
 		<div class="flex flex-col gap-5">
 			{#if groups.length > 0}

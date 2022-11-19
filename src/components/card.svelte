@@ -41,7 +41,7 @@
 		<div class="text-center">
 			<input
 				maxlength="1"
-				class="w-4 font-bold text-center bg-transparent"
+				class="w-10 font-bold text-center bg-transparent"
 				placeholder="-"
 				type="number"
 			/>
@@ -51,7 +51,7 @@
 		<div class="text-center">
 			<input
 				maxlength="1"
-				class="w-4 font-bold text-center bg-transparent"
+				class="w-10 font-bold text-center bg-transparent"
 				placeholder="-"
 				type="number"
 			/>

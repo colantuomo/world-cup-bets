@@ -5,7 +5,6 @@
 	export let match: Match;
 
 	function formatDate(date: Date) {
-		console.log(date);
 		const day = format(date, 'd');
 		const month = format(date, 'M');
 		const dayAndMonth = `${day}/${month}`;

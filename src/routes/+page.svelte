@@ -18,7 +18,6 @@
 
 	onMount(() => {
 		auth.onAuthStateChanged((user) => {
-			console.log('auth state changed', user);
 			if (user === null) {
 				window.location.href = '/login';
 				return;

@@ -49,7 +49,12 @@
 		</div>
 		<div class="items-center font-bold">X</div>
 		<div class="text-center">
-			<input class="w-4 font-bold text-center bg-transparent" placeholder="-" type="text" />
+			<input
+				maxlength="1"
+				class="w-4 font-bold text-center bg-transparent"
+				placeholder="-"
+				type="number"
+			/>
 			<p>-</p>
 		</div>
 	</div>

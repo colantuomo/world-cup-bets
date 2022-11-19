@@ -28,6 +28,7 @@
 		"prettier-plugin-svelte": "^2.7.0",
 		"svelte": "^3.46.0",
 		"svelte-check": "^2.7.1",
+		"svelte-loading-spinners": "^0.3.4",
 		"svelte-preprocess": "^4.10.7",
 		"tailwindcss": "^3.2.4",
 		"tslib": "^2.3.1",
@@ -36,6 +37,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"date-fns": "^2.29.3",
 		"firebase": "^9.14.0"
 	}
 }

@@ -1,5 +1,6 @@
 <script>
 	import { initializeFirebase } from '$lib/firebase';
+	import logo from '$lib/images/catar-logo.png';
 	const { signInWithPopup, auth, googleProvider } = initializeFirebase();
 
 	function login() {
@@ -10,5 +11,9 @@
 	}
 </script>
 
-<h1>login screen</h1>
-<button on:click={login}>Login with google</button>
+<div class="container mx-auto px-6 md:px-60 flex flex-col items-center">
+	<img class="w-96" alt="The project logo" src={logo} />
+	<button class="bg-blue-500 text-white p-2 rounded-lg font-bold w-52" on:click={login}
+		>Login with google</button
+	>
+</div>

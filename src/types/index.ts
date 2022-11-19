@@ -1,27 +1,31 @@
 export interface Match {
-	id: number;
-	cupId: number;
-	teamAId: number;
-	teamBId: number;
-	scoreA: null;
-	scoreB: null;
-	type: string;
+	matchId: number;
+	matchScoreA: number;
+	matchScoreB: number;
+	matchType: string;
 	matchDate: string;
-	bets: Bet[];
+	teamIdA: number;
+	teamNameA: string;
+	teamTagA: string;
+	teamAvatarA: string;
+	teamIdB: number;
+	teamNameB: string;
+	teamTagB: string;
+	teamAvatarB: string;
+	betId: number;
+	betScoreA: number;
+	betScoreB: number;
+	totalPoints: number;
+	canEdit: boolean;
 }
 
-export interface Bet {
-	id: number;
-	userId: number;
-	matchId: number;
-	scoreA: number;
-	scoreB: number;
-	canEdit: boolean;
-	totalPoints: number;
+export enum Groups {
+	GROUP_A = 'GROUP_A',
+	GROUP_B = 'GROUP_B'
 }
 
 export interface MatchesData {
-	matches: Match[];
+	groups: { [key: string]: Match[] };
 }
 
 export interface CustomLocals extends App.Locals {

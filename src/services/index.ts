@@ -29,19 +29,23 @@ async function request<T = unknown>(url: string, method: Method, userId: string,
 			};
 			break;
 	}
-	const r = fetch(url, {
-		...requestParams,
-		headers: {
-			'Content-Type': 'application/json',
-			'user-id': userId
-		}
-	});
 	try {
-		const json = (await r).json();
+		const r = await fetch(url, {
+			...requestParams,
+			headers: {
+				'Content-Type': 'application/json',
+				'user-id': userId
+			}
+		});
+		if (!r.ok) {
+			const json = await r.json();
+			throw json;
+		}
+		const json = r.json();
 		const data = (await json) as T;
 		return { data, error: null };
 	} catch (error) {
-		return { data: null, error };
+		return { data: null, error: error as Error };
 	}
 }
 
@@ -54,7 +58,7 @@ export async function getMatchesWithBets(userId: string) {
 }
 
 export async function saveBets(userId: string, bets: Bet[]) {
-	const { data, error } = await request<Match[]>(`${API_URL}/api/v1/bets`, 'POST', userId, bets);
+	const { data, error } = await request<Match[]>(`${API_URL}/api/v1/bets`, 'PATCH', userId, bets);
 	if (error) {
 		throw error;
 	}

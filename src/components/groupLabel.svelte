@@ -1,27 +1,38 @@
 <script lang="ts">
+	import { toast } from '@zerodevx/svelte-toast';
+	import { Moon } from 'svelte-loading-spinners';
 	import type { User } from 'firebase/auth';
 	import { saveBets } from '../services';
 	import { userStore } from '../stores';
 	import type { Bet, Match } from '../types';
 	import Card from './card.svelte';
+	import { toasts } from '../helpers/toast';
 
 	export let name: string;
 	export let matches: Match[];
 
 	let currentUser: User;
 	let bets: Bet[] = [];
+	let isLoading: boolean;
 
 	$: dontHaveABet = bets.length === 0;
 
 	userStore.subscribe((user) => (currentUser = user));
 
 	async function sendBets() {
-		await saveBets(currentUser.uid, bets);
+		isLoading = true;
+		try {
+			await saveBets(currentUser.uid, bets);
+			toasts.success('Aposta feita com sucesso!');
+		} catch (error: any) {
+			toasts.error(error.message[0]);
+		}
+		isLoading = false;
 		bets = [];
 	}
 
 	function onScoresFilled(bet: CustomEvent<Partial<Bet>>) {
-		const updatedBet = { ...bet.detail, userId: currentUser.uid };
+		const updatedBet = { ...bet.detail };
 		bets = [...bets, updatedBet as Bet];
 	}
 </script>
@@ -34,8 +45,14 @@
 		{/each}
 	</div>
 	<button
-		disabled={dontHaveABet}
-		class="bg-blue-500 text-white p-2 rounded-lg font-bold w-52 disabled:bg-slate-400"
-		on:click={sendBets}>Enviar apostas</button
+		disabled={dontHaveABet || isLoading}
+		class="flex justify-center bg-blue-500 text-white p-2 rounded-lg font-bold w-52 disabled:bg-gray-300"
+		on:click={sendBets}
 	>
+		{#if isLoading}
+			<Moon size={24} color="black" />
+		{:else}
+			Salvar apostas
+		{/if}
+	</button>
 </div>

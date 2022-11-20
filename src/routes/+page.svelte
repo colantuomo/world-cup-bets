@@ -3,19 +3,21 @@
 	import { quintOut } from 'svelte/easing';
 	import { onMount } from 'svelte';
 	import { Moon } from 'svelte-loading-spinners';
-	import type { MatchesData } from '../types';
 	import GroupLabel from '../components/groupLabel.svelte';
 	import { initializeFirebase } from '../lib/firebase';
 	import type { User } from 'firebase/auth';
 	import logo from '$lib/images/logo.png';
+	import { userStore } from '../stores';
+	import { getMatchesWithBets } from '../services';
+	import type { MatchesData } from '../types';
 
-	export let data: MatchesData;
 	const { auth } = initializeFirebase();
 
-	let currentUser: User;
-	let groups: any = [];
-	groups = Object.values(data?.groups);
-	const groupsName = Object.keys(data.groups);
+	let currentUser: User | undefined;
+
+	let promise: Promise<MatchesData | null>;
+
+	userStore.subscribe((user) => (currentUser = user));
 
 	onMount(() => {
 		auth.onAuthStateChanged((user) => {
@@ -23,13 +25,14 @@
 				window.location.href = '/login';
 				return;
 			}
-			currentUser = user;
+			userStore.set(user);
+			promise = getMatchesWithBets(user.uid);
 		});
 	});
 </script>
 
 <svelte:head>
-	<title>Daniel do Bets</title>
+	<title>World Cup Bets</title>
 	<meta name="description" content="World Cup Bets App" />
 </svelte:head>
 
@@ -40,21 +43,26 @@
 		</div>
 	</div>
 {:else}
-	<section
-		transition:fade={{ delay: 250, duration: 1500, easing: quintOut }}
-		class="container mx-auto px-4"
-	>
-		<div class="flex flex-col items-center py-4">
-			<!-- <h1 class="text-3xl text-center font-bold">Daniel do Bets</h1> -->
-			<img class="w-32" alt="Main logo" src={logo} />
-			<h2 class="text-lg text-center font-semibold text-gray-500">{currentUser?.displayName}</h2>
-		</div>
-		<div class="flex flex-col gap-5">
-			{#if groups.length > 0}
-				{#each groups as group, i}
-					<GroupLabel name={groupsName[i]} matches={group} />
-				{/each}
-			{/if}
-		</div>
-	</section>
+	{#await promise then data}
+		{#if data !== null}
+			<section
+				transition:fade={{ delay: 250, duration: 1500, easing: quintOut }}
+				class="container mx-auto px-4"
+			>
+				<div class="flex flex-col items-center py-4">
+					<img class="w-32" alt="Main logo" src={logo} />
+					<h2 class="text-lg text-center font-semibold text-gray-500">
+						{currentUser?.displayName}
+					</h2>
+				</div>
+				<div class="flex flex-col gap-5">
+					{#if Object.values(data).length > 0}
+						{#each Object.values(data) as group, i}
+							<GroupLabel name={Object.keys(data)[i]} matches={group} />
+						{/each}
+					{/if}
+				</div>
+			</section>
+		{/if}
+	{/await}
 {/if}

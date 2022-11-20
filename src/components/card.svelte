@@ -1,8 +1,23 @@
 <script lang="ts">
 	import { format } from 'date-fns';
 	import type { Match } from '../types';
+	import { createEventDispatcher } from 'svelte';
+
+	const dispatch = createEventDispatcher();
 
 	export let match: Match;
+
+	let teamAScore: number = match.betScoreA;
+	let teamBScore: number = match.betScoreB;
+
+	function whenTheScoresWasFilled() {
+		if (!teamAScore || !teamBScore) return;
+		dispatch('scoresFilled', {
+			matchId: match.matchId,
+			teamAScore,
+			teamBScore
+		});
+	}
 
 	function formatDate(date: Date) {
 		const day = format(date, 'd');
@@ -40,20 +55,28 @@
 		</div>
 		<div class="text-center">
 			<input
+				min="0"
+				disabled={match.canEdit}
 				maxlength="1"
 				class="w-10 font-bold text-center bg-transparent"
 				placeholder="-"
 				type="number"
+				bind:value={teamAScore}
+				on:change={whenTheScoresWasFilled}
 			/>
 			<p>-</p>
 		</div>
 		<div class="items-center font-bold">X</div>
 		<div class="text-center">
 			<input
+				min="0"
+				disabled={match.canEdit}
 				maxlength="1"
 				class="w-10 font-bold text-center bg-transparent"
 				placeholder="-"
 				type="number"
+				bind:value={teamBScore}
+				on:change={whenTheScoresWasFilled}
 			/>
 			<p>-</p>
 		</div>

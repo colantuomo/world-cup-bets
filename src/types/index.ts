@@ -28,6 +28,13 @@ export interface MatchesData {
 	groups: { [key: string]: Match[] };
 }
 
+export interface Bet {
+	userId: string;
+	matchId: number;
+	scoreA: number;
+	scoreB: number;
+}
+
 export interface CustomLocals extends App.Locals {
 	userId: string;
 }

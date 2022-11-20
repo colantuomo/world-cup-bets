@@ -6,16 +6,20 @@
 	const dispatch = createEventDispatcher();
 
 	export let match: Match;
-	console.log('total points: ', match.totalPoints);
 	let teamAScore: number = match.betScoreA;
 	let teamBScore: number = match.betScoreB;
 
 	function whenTheScoresWasFilled() {
-		if (!teamAScore || !teamBScore) return;
+		if (teamAScore === null || teamBScore === null) return;
+		let betIdParam = {};
+		if (match.betId !== null) {
+			betIdParam = { id: match.betId };
+		}
 		dispatch('scoresFilled', {
 			matchId: match.matchId,
-			teamAScore,
-			teamBScore
+			scoreA: teamAScore,
+			scoreB: teamBScore,
+			...betIdParam
 		});
 	}
 
@@ -43,7 +47,7 @@
 	}
 </script>
 
-<div class={`flex flex-col rounded-sm border-solid border-2 w-80 ${bg} ${border}`}>
+<div class={`flex flex-col rounded-sm border-solid border-2 w-80 hover:shadow-lg ${bg} ${border}`}>
 	<div class="flex flex-1 p-6 justify-between gap-5">
 		<div class="flex-row text-center flex-1 justify-center items-center">
 			<p class="text-xl font-bold">{formatDate(new Date(match.matchDate)).day}</p>

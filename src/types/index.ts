@@ -33,6 +33,7 @@ export interface Bet {
 	matchId: number;
 	scoreA: number;
 	scoreB: number;
+	id?: number;
 }
 
 export interface CustomLocals extends App.Locals {

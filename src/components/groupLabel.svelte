@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { toast } from '@zerodevx/svelte-toast';
 	import { Moon } from 'svelte-loading-spinners';
 	import type { User } from 'firebase/auth';
-	import { saveBets } from '../services';
+	import { editBets, saveBets } from '../services';
 	import { userStore } from '../stores';
 	import type { Bet, Match } from '../types';
 	import Card from './card.svelte';
@@ -22,16 +21,27 @@
 	async function sendBets() {
 		isLoading = true;
 		try {
-			await saveBets(currentUser.uid, bets);
+			//TODO change this to a better validation of PATCH or POST;
+			const isANewBet = bets[0]?.id ? false : true;
+			if (isANewBet) {
+				await saveBets(currentUser.uid, bets);
+			} else {
+				await editBets(currentUser.uid, bets);
+			}
 			toasts.success('Aposta feita com sucesso!');
+			bets = [];
 		} catch (error: any) {
+			bets = [];
 			toasts.error(error.message[0]);
 		}
 		isLoading = false;
-		bets = [];
 	}
 
-	function onScoresFilled(bet: CustomEvent<Partial<Bet>>) {
+	function onScoresFilled(bet: CustomEvent<Bet>) {
+		const index = bets.findIndex(({ matchId }) => matchId === bet.detail.matchId);
+		if (index > -1) {
+			bets.splice(index, 1);
+		}
 		const updatedBet = { ...bet.detail };
 		bets = [...bets, updatedBet as Bet];
 	}

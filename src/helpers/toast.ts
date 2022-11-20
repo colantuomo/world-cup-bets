@@ -4,7 +4,7 @@ function success(msg: string) {
 	toast.push(msg, {
 		theme: {
 			'--toastBackground': '#9bdd9b',
-			'--toastColor': 'white',
+			'--toastColor': 'black',
 			'--toastBarBackground': 'darkgreen',
 			'--toastBorderRadius': '0.3rem'
 		}

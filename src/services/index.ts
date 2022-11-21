@@ -76,7 +76,7 @@ export async function editBets(userId: string, bets: Bet[]) {
 
 export async function createUser(customUser: CustomUser) {
 	return await request<Match[]>(
-		`${API_URL}/api/v1/users/google-users`,
+		`${API_URL}/api/v1/users`,
 		'POST',
 		customUser.googleUserId,
 		customUser
@@ -84,5 +84,5 @@ export async function createUser(customUser: CustomUser) {
 }
 
 export async function getUser(userId: string) {
-	return await request<Match[]>(`${API_URL}/api/v1/users/${userId}`, 'GET', userId);
+	return await request<Match[]>(`${API_URL}/api/v1/users/google-users/${userId}`, 'GET', userId);
 }

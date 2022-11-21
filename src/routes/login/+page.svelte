@@ -1,11 +1,22 @@
 <script>
 	import { initializeFirebase } from '$lib/firebase';
 	import logo from '$lib/images/catar-logo.png';
+	import { createUser, getUser } from '../../services';
 	const { signInWithPopup, auth, googleProvider } = initializeFirebase();
 
 	function login() {
-		signInWithPopup(auth, googleProvider).then((user) => {
-			document.cookie = `userId=${user.user.uid}`;
+		signInWithPopup(auth, googleProvider).then(async ({ user }) => {
+			document.cookie = `userId=${user.uid}`;
+			const { error } = await getUser(user.uid);
+			if (error) {
+				const { error } = await createUser({
+					googleUserId: user.uid,
+					name: user.displayName ?? '',
+					avatar: null
+				});
+				if (error === null) window.location.href = '/';
+				return;
+			}
 			window.location.href = '/';
 		});
 	}

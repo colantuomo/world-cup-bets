@@ -1,4 +1,4 @@
-import type { Bet, Match, MatchesData } from '../types';
+import type { Bet, CustomUser, Match, MatchesData } from '../types';
 
 type Method = 'GET' | 'POST' | 'PUT' | 'PATCH';
 const API_URL = 'https://world-cup-bets-service-production.up.railway.app';
@@ -72,4 +72,17 @@ export async function editBets(userId: string, bets: Bet[]) {
 		throw error;
 	}
 	return data;
+}
+
+export async function createUser(customUser: CustomUser) {
+	return await request<Match[]>(
+		`${API_URL}/api/v1/users`,
+		'POST',
+		customUser.googleUserId,
+		customUser
+	);
+}
+
+export async function getUser(userId: string) {
+	return await request<Match[]>(`${API_URL}/api/v1/users/${userId}`, 'GET', userId);
 }

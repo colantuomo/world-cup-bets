@@ -37,3 +37,8 @@ export interface Bet {
 export interface CustomLocals extends App.Locals {
 	userId: string;
 }
+export interface CustomUser {
+	name: string;
+	googleUserId: string;
+	avatar: null;
+}

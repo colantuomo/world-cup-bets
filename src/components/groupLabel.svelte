@@ -21,11 +21,12 @@
 	async function sendBets() {
 		isLoading = true;
 		try {
-			//TODO change this to a better validation of PATCH or POST;
-			const isANewBet = bets[0]?.id ? false : true;
-			if (isANewBet) {
+			const oldBets = bets.filter(({ id }) => id !== undefined);
+			const newBets = bets.filter(({ id }) => id === undefined);
+			if (newBets.length > 0) {
 				await saveBets(currentUser.uid, bets);
-			} else {
+			}
+			if (oldBets.length > 0) {
 				await editBets(currentUser.uid, bets);
 			}
 			toasts.success('Aposta feita com sucesso!');

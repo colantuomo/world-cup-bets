@@ -76,7 +76,7 @@ export async function editBets(userId: string, bets: Bet[]) {
 
 export async function createUser(customUser: CustomUser) {
 	return await request<Match[]>(
-		`${API_URL}/api/v1/users`,
+		`${API_URL}/api/v1/users/google-users`,
 		'POST',
 		customUser.googleUserId,
 		customUser

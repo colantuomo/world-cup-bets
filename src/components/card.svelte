@@ -73,8 +73,8 @@
 			<p>Resultado Final:</p>
 		</div>
 		<div class="text-center">
-			{#if !match.canEdit}
-				<p class="w-10 font-bold">{teamAScore}</p>
+			{#if !match.canEdit || teamAScore === null}
+				<p class="w-10 font-bold">{teamAScore ?? '-'}</p>
 			{:else}
 				<input
 					min="0"
@@ -91,8 +91,8 @@
 		</div>
 		<div class="items-center font-bold">X</div>
 		<div class="text-center">
-			{#if !match.canEdit}
-				<p class="w-10 font-bold">{teamBScore}</p>
+			{#if !match.canEdit || teamBScore === null}
+				<p class="w-10 font-bold">{teamBScore ?? '-'}</p>
 			{:else}
 				<input
 					min="0"

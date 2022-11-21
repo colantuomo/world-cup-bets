@@ -63,7 +63,7 @@
 					<h2 class="text-lg text-center font-semibold text-gray-500">
 						{currentUser?.displayName}
 					</h2>
-					<h3 class="text-md text-center text-gray-500">Pontos atuais: {getMyCurrentTotalPoints(data)}</h3>
+					<h3 class="text-md text-center text-gray-500">Meus pontos atuais: {getMyCurrentTotalPoints(data)}</h3>
 				</div>
 				<div class="flex flex-col gap-5">
 					{#if Object.values(data).length > 0}

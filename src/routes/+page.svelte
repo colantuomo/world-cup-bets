@@ -47,7 +47,7 @@
 
 {#if !currentUser}
 	<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-		<div transition:fade={{ delay: 250, duration: 1500, easing: quintOut }}>
+		<div transition:fade={{ delay: 1500, duration: 1500, easing: quintOut }}>
 			<Moon />
 		</div>
 	</div>

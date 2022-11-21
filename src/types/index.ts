@@ -24,9 +24,7 @@ export enum Groups {
 	GROUP_B = 'GROUP_B'
 }
 
-export interface MatchesData {
-	groups: { [key: string]: Match[] };
-}
+export type MatchesData = { [key: string]: Match[] };
 
 export interface Bet {
 	userId: string;

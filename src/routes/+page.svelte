@@ -19,6 +19,15 @@
 
 	userStore.subscribe((user) => (currentUser = user));
 
+	function getMyCurrentTotalPoints(matches: MatchesData) {
+		const groups = Object.values(matches);
+		let myPoints = 0;
+		groups.forEach((group) => {
+			group.forEach(({ totalPoints }) => (myPoints += totalPoints));
+		});
+		return myPoints;
+	}
+
 	onMount(() => {
 		auth.onAuthStateChanged((user) => {
 			if (user === null) {
@@ -50,10 +59,11 @@
 				class="container mx-auto px-4"
 			>
 				<div class="flex flex-col items-center py-4">
-					<img class="w-32" alt="Main logo" src={logo} />
+					<img class="w-32 mb-4" alt="Main logo" src={logo} />
 					<h2 class="text-lg text-center font-semibold text-gray-500">
 						{currentUser?.displayName}
 					</h2>
+					<h3 class="text-md text-center text-gray-500">Pontos atuais: {getMyCurrentTotalPoints(data)}</h3>
 				</div>
 				<div class="flex flex-col gap-5">
 					{#if Object.values(data).length > 0}

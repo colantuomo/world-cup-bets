@@ -28,6 +28,10 @@
 		return myPoints;
 	}
 
+	function logOut() {
+		auth.signOut();
+	}
+
 	onMount(() => {
 		auth.onAuthStateChanged((user) => {
 			if (user === null) {
@@ -58,12 +62,17 @@
 				transition:fade={{ delay: 250, duration: 1500, easing: quintOut }}
 				class="container mx-auto px-4"
 			>
+				<div class="flex justify-end mb-2">
+					<button on:click={logOut} class="p-2 rounded-lg">Logout</button>
+				</div>
 				<div class="flex flex-col items-center py-4">
 					<img class="w-32 mb-4" alt="Main logo" src={logo} />
 					<h2 class="text-lg text-center font-semibold text-gray-500">
 						{currentUser?.displayName}
 					</h2>
-					<h3 class="text-md text-center text-gray-500">Meus pontos atuais: {getMyCurrentTotalPoints(data)}</h3>
+					<h3 class="text-md text-center text-gray-500">
+						Meus pontos atuais: {getMyCurrentTotalPoints(data)}
+					</h3>
 				</div>
 				<div class="flex flex-col gap-5">
 					{#if Object.values(data).length > 0}

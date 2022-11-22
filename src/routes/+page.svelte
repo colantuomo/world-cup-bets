@@ -20,6 +20,7 @@
 	userStore.subscribe((user) => (currentUser = user));
 
 	function getMyCurrentTotalPoints(matches: MatchesData) {
+		if (!matches) return;
 		const groups = Object.values(matches);
 		let myPoints = 0;
 		groups.forEach((group) => {
@@ -59,7 +60,7 @@
 	{#await promise then data}
 		{#if data !== null}
 			<section
-				transition:fade={{ delay: 250, duration: 1500, easing: quintOut }}
+				transition:fade={{ delay: 500, duration: 1500, easing: quintOut }}
 				class="container mx-auto px-4"
 			>
 				<div class="flex justify-end mb-2">
@@ -75,7 +76,7 @@
 					</h3>
 				</div>
 				<div class="flex flex-col gap-5">
-					{#if Object.values(data).length > 0}
+					{#if data && Object.values(data).length > 0}
 						{#each Object.values(data) as group, i}
 							<GroupLabel name={Object.keys(data)[i]} matches={group} />
 						{/each}

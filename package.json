@@ -39,6 +39,7 @@
 	"type": "module",
 	"dependencies": {
 		"date-fns": "^2.29.3",
-		"firebase": "^9.14.0"
+		"firebase": "^9.14.0",
+		"svelte-icons": "^2.1.0"
 	}
 }

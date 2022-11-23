@@ -42,3 +42,10 @@ export interface CustomUser {
 	googleUserId: string;
 	avatar: null;
 }
+
+export interface RankingUser {
+	userId: number;
+	userName: string;
+	total: number;
+	isMine: boolean;
+}

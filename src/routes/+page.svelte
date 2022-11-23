@@ -10,6 +10,7 @@
 	import { userStore } from '../stores';
 	import { getMatchesWithBets } from '../services';
 	import type { MatchesData } from '../types';
+	import Button from '../components/button.svelte';
 
 	const { auth } = initializeFirebase();
 
@@ -61,19 +62,24 @@
 		{#if data !== null}
 			<section
 				transition:fade={{ delay: 500, duration: 1500, easing: quintOut }}
-				class="container mx-auto px-4"
+				class="container mx-auto px-4 md:w-3/4"
 			>
-				<div class="flex justify-end mb-2">
-					<button on:click={logOut} class="p-2 rounded-lg">Logout</button>
-				</div>
 				<div class="flex flex-col items-center py-4">
 					<img class="w-32 mb-4" alt="Main logo" src={logo} />
 					<h2 class="text-lg text-center font-semibold text-gray-500">
 						{currentUser?.displayName}
 					</h2>
-					<h3 class="text-md text-center text-gray-500">
-						Meus pontos atuais: {getMyCurrentTotalPoints(data)}
-					</h3>
+				</div>
+				<div class="flex justify-between py-4">
+					<div class="flex gap-2">
+						<Button
+							loading={false}
+							text="Ranking"
+							type="Secondary"
+							on:onPress={() => (window.location.href = '/ranking')}
+						/>
+					</div>
+					<Button loading={false} text="Logout" type="Secondary" on:click={logOut} />
 				</div>
 				<div class="flex flex-col gap-5">
 					{#if data && Object.values(data).length > 0}

@@ -1,0 +1,68 @@
+<script lang="ts">
+	import { getRanking } from '../../services';
+	import { onMount } from 'svelte';
+	import { initializeFirebase } from '../../lib/firebase';
+	import type { RankingUser } from '../../types';
+	import logo from '$lib/images/logo.png';
+	import Button from '../../components/button.svelte';
+	import RankingItem from '../../components/rankingItem.svelte';
+	import { Moon } from 'svelte-loading-spinners';
+	import { quintOut } from 'svelte/easing';
+	import { fade } from 'svelte/transition';
+
+	let promise: Promise<{ data: RankingUser[] | null; error: any }>;
+	const { auth } = initializeFirebase();
+	function logOut() {
+		auth.signOut();
+	}
+	onMount(() => {
+		auth.onAuthStateChanged((user) => {
+			if (user === null) {
+				window.location.href = '/login';
+				return;
+			}
+			promise = getRanking(user.uid);
+		});
+	});
+</script>
+
+{#if promise === undefined}
+	<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+		<div transition:fade={{ delay: 1500, duration: 1500, easing: quintOut }}>
+			<Moon />
+		</div>
+	</div>
+{:else}
+	<div class="container mx-auto px-2 flex justify-center">
+		{#await promise then prm}
+			{#if prm !== undefined && prm.data !== null}
+				<div
+					transition:fade={{ delay: 500, duration: 1500, easing: quintOut }}
+					class="flex flex-col items-center py-4 md:w-1/2"
+				>
+					<img class="w-32 mb-4" alt="Main logo" src={logo} />
+					<div class="flex justify-between py-4 gap-6 w-full">
+						<div class="flex gap-2">
+							<Button
+								loading={false}
+								text="Minhas apostas"
+								type="Secondary"
+								on:onPress={() => (window.location.href = '/')}
+							/>
+						</div>
+						<Button loading={false} text="Logout" type="Secondary" on:click={logOut} />
+					</div>
+					<div class="flex flex-col w-full gap-3">
+						{#each prm.data as rankingUser, i}
+							<RankingItem
+								name={rankingUser.userName}
+								points={rankingUser.total}
+								position={i + 1}
+							/>
+						{/each}
+					</div>
+				</div>
+			{/if}
+		{/await}
+	</div>
+{/if}

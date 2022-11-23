@@ -1,4 +1,5 @@
 <script lang="ts">
+	import LockIcon from 'svelte-icons/md/MdLock.svelte';
 	import { format } from 'date-fns';
 	import type { Match } from '../types';
 	import { createEventDispatcher } from 'svelte';
@@ -48,6 +49,11 @@
 </script>
 
 <div class={`flex flex-col rounded-sm border-solid border-2 w-80 hover:shadow-lg ${bg} ${border}`}>
+	<!-- <div class="p-4 bg-white rounded-full w-16 absolute bg-gradient-to-r from-black to-gray-500 ">
+		<div class="w-8 text-white">
+			<LockIcon />
+		</div>
+	</div> -->
 	<div class="flex flex-1 p-6 justify-between gap-5">
 		<div class="flex-row text-center flex-1 justify-center items-center">
 			<p class="text-xl font-bold">{formatDate(new Date(match.matchDate)).day}</p>

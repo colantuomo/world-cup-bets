@@ -1,10 +1,21 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 	import { Moon } from 'svelte-loading-spinners';
+	import type { ButtonTypes } from './interfaces';
 
 	const dispatch = createEventDispatcher();
 	export let loading: boolean;
 	export let text: string;
+	export let type: keyof typeof ButtonTypes;
+
+	function chooseColorPalletByType() {
+		switch (type) {
+			case 'Secondary':
+				return 'text-black disabled:bg-gray-300 bg-gray-100';
+			default:
+				return 'text-white disabled:bg-gray-300 bg-blue-500';
+		}
+	}
 
 	function onClick() {
 		dispatch('onPress', {});
@@ -13,7 +24,7 @@
 
 <button
 	disabled={loading}
-	class="flex justify-center bg-blue-500 text-white p-2 rounded-lg font-bold w-52 disabled:bg-gray-300"
+	class={`flex justify-center p-2 rounded-lg font-bold md:w-52 ${chooseColorPalletByType()}`}
 	on:click={onClick}
 >
 	{#if loading}

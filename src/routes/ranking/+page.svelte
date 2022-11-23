@@ -26,6 +26,11 @@
 	});
 </script>
 
+<svelte:head>
+	<title>World Cup Bets - Ranking</title>
+	<meta name="description" content="World Cup Bets App" />
+</svelte:head>
+
 {#if promise === undefined}
 	<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
 		<div transition:fade={{ delay: 1500, duration: 1500, easing: quintOut }}>

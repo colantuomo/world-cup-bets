@@ -63,6 +63,7 @@
 								name={rankingUser.userName}
 								points={rankingUser.total}
 								position={i + 1}
+								isMine={rankingUser.isMine}
 							/>
 						{/each}
 					</div>

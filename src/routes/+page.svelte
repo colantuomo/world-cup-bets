@@ -62,7 +62,7 @@
 		{#if data !== null}
 			<section
 				transition:fade={{ delay: 500, duration: 1500, easing: quintOut }}
-				class="container mx-auto px-4 md:w-3/4"
+				class="container mx-auto px-4 md:w-4/5"
 			>
 				<div class="flex flex-col items-center py-4">
 					<img class="w-32 mb-4" alt="Main logo" src={logo} />

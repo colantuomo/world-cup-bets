@@ -77,7 +77,7 @@
 						Meus pontos atuais: {getMyCurrentTotalPoints(data)}
 					</h3>
 				</div>
-				<div class="flex justify-between py-4">
+				<div class="flex justify-between md:justify-center md:gap-8 py-4">
 					<div class="flex gap-2">
 						<Button
 							loading={false}

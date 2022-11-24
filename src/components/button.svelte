@@ -18,7 +18,7 @@
 	}
 
 	function onClick() {
-		dispatch('onPress', {});
+		dispatch('click', {});
 	}
 </script>
 

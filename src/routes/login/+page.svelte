@@ -29,5 +29,5 @@
 
 <div class="container mx-auto px-6 md:px-60 flex flex-col items-center">
 	<img class="w-96" alt="The project logo" src={logo} />
-	<Button on:onPress={login} {loading} text="Login with google" />
+	<Button on:click={login} {loading} text="Login with google" type="Primary" />
 </div>

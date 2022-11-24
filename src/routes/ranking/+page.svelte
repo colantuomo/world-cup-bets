@@ -52,7 +52,7 @@
 								loading={false}
 								text="Minhas apostas"
 								type="Secondary"
-								on:onPress={() => (window.location.href = '/')}
+								on:click={() => (window.location.href = '/')}
 							/>
 						</div>
 						<Button loading={false} text="Logout" type="Secondary" on:click={logOut} />

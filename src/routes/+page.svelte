@@ -31,6 +31,7 @@
 	}
 
 	function logOut() {
+		console.log("log out!");
 		auth.signOut();
 	}
 
@@ -79,7 +80,7 @@
 							loading={false}
 							text="Ranking"
 							type="Secondary"
-							on:onPress={() => (window.location.href = '/ranking')}
+							on:click={() => (window.location.href = '/ranking')}
 						/>
 					</div>
 					<Button loading={false} text="Logout" type="Secondary" on:click={logOut} />

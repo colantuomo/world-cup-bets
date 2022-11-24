@@ -9,7 +9,7 @@
 	import logo from '$lib/images/logo.png';
 	import { userStore } from '../stores';
 	import { getMatchesWithBets } from '../services';
-	import type { MatchesData } from '../types';
+	import { Groups, type GroupIndex, type MatchesData } from '../types';
 	import Button from '../components/button.svelte';
 
 	const { auth } = initializeFirebase();
@@ -31,8 +31,11 @@
 	}
 
 	function logOut() {
-		console.log("log out!");
 		auth.signOut();
+	}
+
+	function getNameByGroupIndex(index: string) {
+		return Groups[index as GroupIndex].toString();
 	}
 
 	onMount(() => {
@@ -88,7 +91,7 @@
 				<div class="flex flex-col gap-5">
 					{#if data && Object.values(data).length > 0}
 						{#each Object.values(data) as group, i}
-							<GroupLabel name={Object.keys(data)[i]} matches={group} />
+							<GroupLabel name={getNameByGroupIndex(Object.keys(data)[i])} matches={group} />
 						{/each}
 					{/if}
 				</div>

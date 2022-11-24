@@ -20,9 +20,17 @@ export interface Match {
 }
 
 export enum Groups {
-	GROUP_A = 'GROUP_A',
-	GROUP_B = 'GROUP_B'
+	GROUP_A = 'Grupo A',
+	GROUP_B = 'Grupo B',
+	GROUP_C = 'Grupo C',
+	GROUP_D = 'Grupo D',
+	GROUP_E = 'Grupo E',
+	GROUP_F = 'Grupo F',
+	GROUP_G = 'Grupo G',
+	GROUP_H = 'Grupo H'
 }
+
+export type GroupIndex = keyof typeof Groups;
 
 export type MatchesData = { [key: string]: Match[] };
 

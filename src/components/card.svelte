@@ -12,6 +12,7 @@
 
 	function whenTheScoresWasFilled() {
 		if (teamAScore === null || teamBScore === null) return;
+		if (teamAScore.toString() !== '-' || teamBScore.toString() !== '-') return;
 		let betIdParam = {};
 		if (match.betId !== null) {
 			betIdParam = { id: match.betId };
@@ -86,7 +87,7 @@
 					min="0"
 					disabled={!match.canEdit}
 					maxlength="1"
-					class="w-10 font-bold text-center md:pl-4 bg-transparent"
+					class="w-10 font-bold text-center bg-white"
 					placeholder="-"
 					type="number"
 					bind:value={teamAScore}
@@ -104,7 +105,7 @@
 					min="0"
 					disabled={!match.canEdit}
 					maxlength="1"
-					class="w-10 font-bold text-center md:pl-4 bg-transparent"
+					class="w-10 font-bold text-center bg-white rounded-sm"
 					placeholder="-"
 					type="number"
 					bind:value={teamBScore}

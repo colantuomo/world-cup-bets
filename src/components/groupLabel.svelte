@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { Moon } from 'svelte-loading-spinners';
-	import type { User } from 'firebase/auth';
 	import { editBets, saveBets } from '../services';
-	import { userStore } from '../stores';
+	import { userStore, type LocalsUser } from '../stores';
 	import type { Bet, Match } from '../types';
 	import Card from './card.svelte';
 	import { toasts } from '../helpers/toast';
@@ -10,7 +9,7 @@
 	export let name: string;
 	export let matches: Match[];
 
-	let currentUser: User;
+	let currentUser: LocalsUser;
 	let bets: Bet[] = [];
 	let isLoading: boolean;
 
@@ -24,10 +23,10 @@
 			const oldBets = bets.filter(({ id }) => id !== undefined);
 			const newBets = bets.filter(({ id }) => id === undefined);
 			if (newBets.length > 0) {
-				await saveBets(currentUser.uid, bets);
+				await saveBets(currentUser.userId, bets);
 			}
 			if (oldBets.length > 0) {
-				await editBets(currentUser.uid, bets);
+				await editBets(currentUser.userId, bets);
 			}
 			toasts.success('Aposta feita com sucesso!');
 			bets = [];

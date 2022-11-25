@@ -1,4 +1,7 @@
-export function load(teste: any) {
-	console.log('page data!', teste);
-	return { params: '' };
-}
+// import type { PageLoad } from './$types';
+
+// export const load: PageLoad = ({ params }) => {
+// 	return {
+// 		params
+// 	};
+// };

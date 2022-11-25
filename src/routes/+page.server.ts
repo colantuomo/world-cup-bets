@@ -2,7 +2,7 @@ import type { ServerLoadEvent } from '@sveltejs/kit';
 import { getMatchesWithBets } from '../services';
 import type { CustomLocals, MatchesData, PageLoadData } from '../types';
 
-export const prerender = 'auto';
+// export const prerender = 'auto';
 interface CustomServerLoadEvent extends ServerLoadEvent {
 	locals: CustomLocals;
 }

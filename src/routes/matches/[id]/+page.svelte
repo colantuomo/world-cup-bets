@@ -3,14 +3,19 @@
 	import { quintOut } from 'svelte/easing';
 	import GroupLabel from '../../../components/groupLabel.svelte';
 	import { Groups, type GroupIndex, type MatchesData, type PageLoadData } from '../../../types';
+	import { onMount } from 'svelte';
 
 	export let data: PageLoadData<MatchesData>;
 	const matches = data.response;
-	const userName = sessionStorage.getItem('rankingUserName');
+	let userName: string | null;
 
 	function getNameByGroupIndex(index: string) {
 		return Groups[index as GroupIndex].toString();
 	}
+
+	onMount(() => {
+		userName = sessionStorage.getItem('rankingUserName');
+	});
 </script>
 
 <svelte:head>

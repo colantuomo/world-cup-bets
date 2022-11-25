@@ -7,7 +7,6 @@
 	function isDev() {
 		return data?.url.host !== 'apostas-copa-do-mundo';
 	}
-	console.log('layout data:', data);
 </script>
 
 <SvelteToast {options} />

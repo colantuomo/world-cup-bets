@@ -6,7 +6,7 @@ interface CustomServerLoadEvent extends ServerLoadEvent {
 }
 
 export function load({ locals }: CustomServerLoadEvent): PageLoadData<Promise<MatchesData>> {
-	if (locals.userId === undefined) {
+	if (!locals?.userId) {
 		redirect(303, '/login');
 	}
 	const response = getMatchesWithBets(locals.userId);

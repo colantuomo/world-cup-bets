@@ -6,7 +6,7 @@
 
 	function isDev() {
 		console.log('url: ', data.url);
-		return data?.url.host !== 'apostas-copa-do-mundo';
+		return data?.url.host !== 'apostas-copa-do-mundo.vercel.app';
 	}
 </script>
 

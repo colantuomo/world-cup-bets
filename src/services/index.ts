@@ -1,4 +1,4 @@
-import type { Bet, CustomUser, Match, MatchesData, RankingUser } from '../types';
+import type { Bet, CustomUser, MatchesData, RankingUser } from '../types';
 
 type Method = 'GET' | 'POST' | 'PUT' | 'PATCH';
 const API_URL = 'https://world-cup-bets-service-production.up.railway.app';
@@ -43,7 +43,7 @@ async function request<T = unknown>(url: string, method: Method, userId: string,
 			throw json;
 		}
 		const string = await r.text();
-		const json = string === '' ? {} : JSON.parse(string);
+		const json = (string === '' ? {} : JSON.parse(string)) as T;
 		return { data: json, error: null };
 	} catch (error) {
 		return { data: null, error: error as Error };
@@ -58,8 +58,20 @@ export async function getMatchesWithBets(userId: string) {
 	return data;
 }
 
+export async function getPlayerMatchesWithBets(userId: string, playerId: string) {
+	const { data, error } = await request<MatchesData>(
+		`${API_URL}/api/v1/matches?userId=${playerId}`,
+		'GET',
+		userId
+	);
+	if (error) {
+		throw error;
+	}
+	return data;
+}
+
 export async function saveBets(userId: string, bets: Bet[]) {
-	const { data, error } = await request<Match[]>(`${API_URL}/api/v1/bets`, 'POST', userId, bets);
+	const { data, error } = await request<void>(`${API_URL}/api/v1/bets`, 'POST', userId, bets);
 	if (error) {
 		throw error;
 	}
@@ -67,7 +79,7 @@ export async function saveBets(userId: string, bets: Bet[]) {
 }
 
 export async function editBets(userId: string, bets: Bet[]) {
-	const { data, error } = await request<Match[]>(`${API_URL}/api/v1/bets`, 'PATCH', userId, bets);
+	const { data, error } = await request<void>(`${API_URL}/api/v1/bets`, 'PATCH', userId, bets);
 	if (error) {
 		throw error;
 	}
@@ -75,7 +87,7 @@ export async function editBets(userId: string, bets: Bet[]) {
 }
 
 export async function createUser(customUser: CustomUser) {
-	return await request<Match[]>(
+	return await request<void>(
 		`${API_URL}/api/v1/users`,
 		'POST',
 		customUser.googleUserId,
@@ -84,7 +96,7 @@ export async function createUser(customUser: CustomUser) {
 }
 
 export async function getUser(userId: string) {
-	return await request<Match[]>(`${API_URL}/api/v1/users/google-users/${userId}`, 'GET', userId);
+	return await request<any>(`${API_URL}/api/v1/users/google-users/${userId}`, 'GET', userId);
 }
 
 export async function getRanking(userId: string) {

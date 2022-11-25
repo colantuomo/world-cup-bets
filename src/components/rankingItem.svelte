@@ -1,8 +1,20 @@
 <script lang="ts">
+	import { createEventDispatcher } from 'svelte';
+
+	export let userId: number;
 	export let name: string;
 	export let points: number;
 	export let position: number;
 	export let isMine: boolean = false;
+
+	const dispatch = createEventDispatcher();
+	function onClick() {
+		if (isMine) return;
+		dispatch('click', {
+			userId,
+			name
+		});
+	}
 
 	function getColorsByPosition() {
 		switch (position) {
@@ -19,7 +31,7 @@
 	}
 </script>
 
-<div class={`p-4 flex items-center gap-6 ${getColorsByPosition()}`}>
+<button on:click={onClick} class={`p-4 flex items-center gap-6 ${getColorsByPosition()}`}>
 	<div
 		class={`bg-gray-600 rounded-full w-10 h-10 p-5 text-white font-bold flex justify-center items-center ${
 			isMine && 'border-2 border-red-500'
@@ -31,4 +43,4 @@
 		<p class="text-md font-semibold">{name}</p>
 		<p class="text-3xl">{points}</p>
 	</div>
-</div>
+</button>

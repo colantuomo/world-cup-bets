@@ -39,6 +39,7 @@
 	}
 
 	onMount(() => {
+		sessionStorage.removeItem('rankingUserName');
 		auth.onAuthStateChanged((user) => {
 			if (user === null) {
 				window.location.href = '/login';

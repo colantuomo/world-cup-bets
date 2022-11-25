@@ -15,7 +15,12 @@
 	function logOut() {
 		auth.signOut();
 	}
+	function navigateToOthersUsersBets(event: CustomEvent<{ userId: number; name: string }>) {
+		sessionStorage.setItem('rankingUserName', event.detail.name);
+		window.location.href = `/matches/${event.detail.userId}`;
+	}
 	onMount(() => {
+		sessionStorage.removeItem('rankingUserName');
 		auth.onAuthStateChanged((user) => {
 			if (user === null) {
 				window.location.href = '/login';
@@ -60,10 +65,12 @@
 					<div class="flex flex-col w-full gap-3">
 						{#each prm.data as rankingUser, i}
 							<RankingItem
+								userId={rankingUser.userId}
 								name={rankingUser.userName}
 								points={rankingUser.total}
 								position={i + 1}
 								isMine={rankingUser.isMine}
+								on:click={navigateToOthersUsersBets}
 							/>
 						{/each}
 					</div>

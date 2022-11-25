@@ -12,7 +12,6 @@
 
 	function whenTheScoresWasFilled() {
 		if (teamAScore === null || teamBScore === null) return;
-		if (teamAScore.toString() !== '-' || teamBScore.toString() !== '-') return;
 		let betIdParam = {};
 		if (match.betId !== null) {
 			betIdParam = { id: match.betId };

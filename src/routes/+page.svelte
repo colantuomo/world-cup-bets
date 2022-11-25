@@ -15,6 +15,8 @@
 	const { auth } = initializeFirebase();
 
 	let currentUser: User | undefined;
+	export let data: any;
+	console.log('component data: ', data);
 
 	let promise: Promise<MatchesData | null>;
 

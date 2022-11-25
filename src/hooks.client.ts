@@ -2,7 +2,7 @@ import type { Handle } from '@sveltejs/kit';
 import type { CustomLocals } from './types';
 
 export const handle: Handle = async ({ event, resolve }) => {
-	console.log('hooks server!', event.locals);
+	console.log('hooks client!', event.locals);
 	const { cookies } = event;
 	const userId = cookies.get('userId');
 	// before endpoint or page is called

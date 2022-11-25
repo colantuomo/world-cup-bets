@@ -20,8 +20,8 @@
 	async function sendBets() {
 		isLoading = true;
 		try {
-			const oldBets = bets.filter(({ id }) => id !== undefined);
-			const newBets = bets.filter(({ id }) => id === undefined);
+			const oldBets = bets.filter(({ id }) => id !== null);
+			const newBets = bets.filter(({ id }) => id === null);
 			if (newBets.length > 0) {
 				await saveBets(currentUser.userId, bets);
 			}

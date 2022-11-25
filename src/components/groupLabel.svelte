@@ -18,7 +18,6 @@
 	userStore.subscribe((user) => (currentUser = user));
 
 	async function sendBets() {
-		console.log('send bets?');
 		isLoading = true;
 		try {
 			const oldBets = bets.filter(({ id }) => id !== undefined);
@@ -32,7 +31,6 @@
 			toasts.success('Aposta feita com sucesso!');
 			bets = [];
 		} catch (error: any) {
-			console.log(error);
 			bets = [];
 			toasts.error(error.message[0]);
 		}

@@ -44,6 +44,7 @@ export interface Bet {
 
 export interface CustomLocals extends App.Locals {
 	userId: string;
+	userName: string;
 }
 export interface CustomUser {
 	name: string;
@@ -57,3 +58,5 @@ export interface RankingUser {
 	total: number;
 	isMine: boolean;
 }
+
+export type PageLoadData<T> = { locals: CustomLocals; response: T };

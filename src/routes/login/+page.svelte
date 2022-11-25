@@ -6,21 +6,28 @@
 	const { signInWithPopup, auth, googleProvider } = initializeFirebase();
 	let loading: boolean;
 
+	function setCookies(id: string, name: string) {
+		document.cookie = `userId=${id}`;
+		document.cookie = `userName=${name}`;
+	}
+
 	function login() {
 		loading = true;
 		signInWithPopup(auth, googleProvider)
 			.then(async ({ user }) => {
-				document.cookie = `userId=${user.uid}`;
+				const userName = user.displayName ?? '';
 				const { error } = await getUser(user.uid);
 				if (error) {
 					const { error } = await createUser({
 						googleUserId: user.uid,
-						name: user.displayName ?? '',
+						name: userName,
 						avatar: null
 					});
+					setCookies(user.uid, userName);
 					if (error === null) window.location.href = '/';
 					return;
 				}
+				setCookies(user.uid, userName);
 				window.location.href = '/';
 			})
 			.finally(() => (loading = false));

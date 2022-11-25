@@ -10,6 +10,7 @@
 	import { quintOut } from 'svelte/easing';
 	import { fade } from 'svelte/transition';
 
+	let loading: boolean;
 	let promise: Promise<{ data: RankingUser[] | null; error: any }>;
 	const { auth } = initializeFirebase();
 	function logOut() {
@@ -54,10 +55,13 @@
 					<div class="flex justify-between md:justify-center py-4 gap-6 w-full">
 						<div class="flex gap-2">
 							<Button
-								loading={false}
+								{loading}
 								text="Minhas apostas"
 								type="Secondary"
-								on:click={() => (window.location.href = '/')}
+								on:click={() => {
+									loading = true;
+									window.location.href = '/';
+								}}
 							/>
 						</div>
 						<Button loading={false} text="Logout" type="Secondary" on:click={logOut} />

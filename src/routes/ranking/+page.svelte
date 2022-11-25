@@ -51,7 +51,7 @@
 					transition:fade={{ delay: 500, duration: 1500, easing: quintOut }}
 					class="flex flex-col items-center py-4 md:w-1/2"
 				>
-					<img class="w-32 h-32 mb-4" alt="Main logo" src={logo} />
+					<img class="w-32 mb-4" alt="Main logo" src={logo} />
 					<div class="flex justify-between md:justify-center py-4 gap-6 w-full">
 						<div class="flex gap-2">
 							<Button

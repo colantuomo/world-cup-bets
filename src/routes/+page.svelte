@@ -41,7 +41,7 @@
 		class="container mx-auto px-4 md:w-4/5"
 	>
 		<div class="flex flex-col items-center py-4">
-			<img class="w-32 h-32 mb-4" alt="Main logo" src={logo} />
+			<img class="w-32 mb-4" alt="Main logo" src={logo} />
 			<h2 class="text-lg text-center font-semibold text-gray-500">
 				{data.locals.userName}
 			</h2>

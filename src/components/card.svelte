@@ -49,6 +49,11 @@
 </script>
 
 <div class={`flex flex-col rounded-sm border-solid border-2 w-80 hover:shadow-lg ${bg} ${border}`}>
+	<!-- <div class="p-4 bg-white rounded-full w-16 absolute bg-gradient-to-r from-black to-gray-500 ">
+		<div class="w-8 text-white">
+			<LockIcon />
+		</div>
+	</div> -->
 	<div class="flex flex-1 p-6 justify-between gap-5">
 		<div class="flex-row text-center flex-1 justify-center items-center">
 			<p class="text-xl font-bold">{formatDate(new Date(match.matchDate)).day}</p>
@@ -57,12 +62,12 @@
 		<div class={`border-l-2 border-gray-300 ${border}`} />
 		<div class="flex justify-center text-center gap-2 flex-1">
 			<div>
-				<img class="w-16 h-16" src={match.teamAvatarA} alt="team_a_flag" />
+				<img class="w-16" src={match.teamAvatarA} alt="team_a_flag" />
 				<p class="text-lg">{match.teamTagA}</p>
 			</div>
 			<p class="font-bold">X</p>
 			<div>
-				<img class="w-16 h-16" src={match.teamAvatarB} alt="team_b_flag" />
+				<img class="w-16" src={match.teamAvatarB} alt="team_b_flag" />
 				<p class="text-lg">{match.teamTagB}</p>
 			</div>
 		</div>

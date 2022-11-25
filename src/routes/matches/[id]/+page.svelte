@@ -25,7 +25,7 @@
 
 {#if data !== null}
 	<div class="bg-yellow-400 h-20 sticky top-0 flex gap-1 justify-center items-center flex-col z-20">
-		<div class="flex gap-2 text-sm md:text-base">
+		<div class="flex gap-1 text-sm md:text-base">
 			<p>Você está vendo as apostas de:</p>
 			<p class="font-bold">{userName ?? ''}</p>
 		</div>

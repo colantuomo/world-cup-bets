@@ -59,4 +59,4 @@ export interface RankingUser {
 	isMine: boolean;
 }
 
-export type PageLoadData<T> = { locals: CustomLocals; response: T };
+export type PageLoadData<T> = { locals: CustomLocals; response: T; error?: unknown };

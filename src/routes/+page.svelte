@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { fade } from 'svelte/transition';
-	import { quintOut } from 'svelte/easing';
 	import GroupLabel from '../components/groupLabel.svelte';
 	import { initializeFirebase } from '../lib/firebase';
 	import logo from '$lib/images/logo.png';
@@ -10,6 +8,7 @@
 	const { auth } = initializeFirebase();
 
 	export let data: PageLoadData<MatchesData>;
+	export let loading: boolean;
 
 	function getMyCurrentTotalPoints(matches: MatchesData) {
 		if (!matches) return;
@@ -36,10 +35,7 @@
 </svelte:head>
 
 {#if data !== null}
-	<section
-		transition:fade={{ delay: 500, duration: 1500, easing: quintOut }}
-		class="container mx-auto px-4 md:w-4/5"
-	>
+	<section class="container mx-auto px-4 md:w-4/5">
 		<div class="flex flex-col items-center py-4">
 			<img class="w-32 mb-4" alt="Main logo" src={logo} />
 			<h2 class="text-lg text-center font-semibold text-gray-500">
@@ -52,10 +48,13 @@
 		<div class="flex justify-between md:justify-center md:gap-8 py-4">
 			<div class="flex gap-2">
 				<Button
-					loading={false}
+					{loading}
 					text="Ranking"
 					type="Secondary"
-					on:click={() => (window.location.href = '/ranking')}
+					on:click={() => {
+						loading = true;
+						window.location.href = '/ranking';
+					}}
 				/>
 			</div>
 			<Button loading={false} text="Logout" type="Secondary" on:click={logOut} />

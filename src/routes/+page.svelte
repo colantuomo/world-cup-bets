@@ -4,10 +4,12 @@
 	import logo from '$lib/images/logo.png';
 	import { Groups, type GroupIndex, type MatchesData, type PageLoadData } from '../types';
 	import Button from '../components/button.svelte';
+	import { userStore } from '../stores';
 
 	const { auth } = initializeFirebase();
 
 	export let data: PageLoadData<MatchesData>;
+	userStore.set({ userId: data.locals.userId, userName: data.locals.userName });
 	export let loading: boolean;
 
 	function getMyCurrentTotalPoints(matches: MatchesData) {

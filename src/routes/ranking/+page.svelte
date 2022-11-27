@@ -39,7 +39,6 @@
 						}}
 					/>
 				</div>
-				<Button loading={false} text="Logout" type="Secondary" on:click={logOut} />
 			</div>
 			<div class="flex flex-col w-full gap-3">
 				{#each data.response as rankingUser, i}

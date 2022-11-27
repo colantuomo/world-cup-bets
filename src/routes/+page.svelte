@@ -5,8 +5,10 @@
 	import { Groups, type GroupIndex, type MatchesData, type PageLoadData } from '../types';
 	import Button from '../components/button.svelte';
 	import { userStore } from '../stores';
+	import { onMount } from 'svelte';
+	import type { Auth } from 'firebase/auth';
 
-	const { auth } = initializeFirebase();
+	const auth: Auth = initializeFirebase().auth;
 
 	export let data: PageLoadData<MatchesData>;
 	userStore.set({ userId: data.locals.userId, userName: data.locals.userName });
@@ -23,12 +25,21 @@
 	}
 
 	function logOut() {
-		auth.signOut();
+		auth?.signOut();
 	}
 
 	function getNameByGroupIndex(index: string) {
 		return Groups[index as GroupIndex].toString();
 	}
+
+	onMount(() => {
+		auth.onAuthStateChanged((user) => {
+			if (user === null) {
+				window.location.href = '/login';
+				return;
+			}
+		});
+	});
 </script>
 
 <svelte:head>

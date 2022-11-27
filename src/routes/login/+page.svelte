@@ -13,24 +13,22 @@
 
 	function login() {
 		loading = true;
-		signInWithPopup(auth, googleProvider)
-			.then(async ({ user }) => {
-				const userName = user.displayName ?? '';
-				const { error } = await getUser(user.uid);
-				if (error) {
-					const { error } = await createUser({
-						googleUserId: user.uid,
-						name: userName,
-						avatar: null
-					});
-					setCookies(user.uid, userName);
-					if (error === null) window.location.href = '/';
-					return;
-				}
+		signInWithPopup(auth, googleProvider).then(async ({ user }) => {
+			const userName = user.displayName ?? '';
+			const { error } = await getUser(user.uid);
+			if (error) {
+				const { error } = await createUser({
+					googleUserId: user.uid,
+					name: userName,
+					avatar: null
+				});
 				setCookies(user.uid, userName);
-				window.location.href = '/';
-			})
-			.finally(() => (loading = false));
+				if (error === null) window.location.href = '/';
+				return;
+			}
+			setCookies(user.uid, userName);
+			window.location.href = '/';
+		});
 	}
 </script>
 

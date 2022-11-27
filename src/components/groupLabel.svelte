@@ -23,10 +23,10 @@
 			const oldBets = bets.filter(({ id }) => id !== undefined);
 			const newBets = bets.filter(({ id }) => id === undefined);
 			if (newBets.length > 0) {
-				await saveBets(currentUser.userId, bets);
+				await saveBets(currentUser.userId, newBets);
 			}
 			if (oldBets.length > 0) {
-				await editBets(currentUser.userId, bets);
+				await editBets(currentUser.userId, oldBets);
 			}
 			toasts.success('Aposta feita com sucesso!');
 			bets = [];

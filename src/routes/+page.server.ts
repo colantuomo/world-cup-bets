@@ -1,17 +1,21 @@
 import { redirect, type ServerLoadEvent } from '@sveltejs/kit';
-import { getMatchesWithBets } from '../services';
-import type { CustomLocals, MatchesData, PageLoadData } from '../types';
+import { getRemainingMatches } from '../services';
+import type { CustomLocals, PageLoadData, RemainingMatch } from '../types';
 interface CustomServerLoadEvent extends ServerLoadEvent {
 	locals: CustomLocals;
 }
 
-export function load({ locals }: CustomServerLoadEvent): PageLoadData<Promise<MatchesData>> {
+export function load({
+	locals,
+	url
+}: CustomServerLoadEvent): PageLoadData<Promise<RemainingMatch[]>> {
 	if (!locals.userId) {
 		throw redirect(302, '/login');
 	}
-	const response = getMatchesWithBets(locals.userId);
+	const response = getRemainingMatches(locals.userId);
 	return {
 		locals,
-		response
+		response,
+		url: url.pathname
 	};
 }

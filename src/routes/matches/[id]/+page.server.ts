@@ -7,7 +7,8 @@ interface CustomServerLoadEvent extends ServerLoadEvent {
 
 export function load({
 	locals,
-	params
+	params,
+	url
 }: CustomServerLoadEvent): PageLoadData<Promise<MatchesData>> {
 	if (!locals.userId || !params?.id) {
 		throw redirect(302, '/login');
@@ -15,6 +16,7 @@ export function load({
 	const response = getPlayerMatchesWithBets(locals.userId, params?.id);
 	return {
 		locals,
-		response
+		response,
+		url: url.pathname
 	};
 }

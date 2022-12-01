@@ -15,7 +15,6 @@
 		{#if isDev()}
 			<div class="bg-red-400 text-center text-white">Ambiente de desenvolvimento</div>
 		{/if}
-
 		<slot />
 	</main>
 </div>

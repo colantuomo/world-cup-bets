@@ -7,25 +7,24 @@
 
 	export let userName: string;
 	export let currentPoints: number;
-	export let currentRoute: string | undefined = '';
 
 	let loading: boolean;
-	let loadingLink: boolean;
-	const auth: Auth = initializeFirebase().auth;
+	let currentRoute: string = '/matches';
 
-	$: boucingFX = loadingLink ? 'animate-bounce' : '';
+	const auth: Auth = initializeFirebase().auth;
 
 	function logOut() {
 		auth?.signOut();
 	}
 
-	function handleLinkClick() {
-		loadingLink = true;
+	// TODO: create a better way to handle link button state;
+	// TODO: create a new store to handle loading state;
+	function handleLinkClick(route: string) {
+		currentRoute = route;
 	}
 
-	function buttonColorByRoute(btnRoute: string) {
-		return btnRoute === currentRoute ? 'bg-red-500 text-white' : 'bg-red-200';
-	}
+	$: btnColor = (btnRoute: string) =>
+		btnRoute === currentRoute ? 'bg-red-500 text-white' : 'bg-red-200';
 </script>
 
 <div class="flex flex-col items-center py-4">
@@ -49,19 +48,19 @@
 	</div>
 	<Button loading={false} text="Logout" type="Secondary" on:click={logOut} />
 </div>
-<div class="flex gap-2 text-sm my-4 font-semibold">
+<div class="flex gap-2 text-sm my-4 font-semibold px-4 md:p-0">
 	<a
-		class={`px-4 py-2 rounded-full hover:shadow-gray-400 hover:shadow-inner ${boucingFX} ${buttonColorByRoute(
-			'/'
+		class={`px-4 py-2 rounded-full hover:shadow-gray-400 hover:shadow-inner $ ${btnColor(
+			'/matches'
 		)}`}
-		href="/"
-		on:click={handleLinkClick}>Jogos hoje</a
+		href="/matches"
+		on:click={() => handleLinkClick('/matches')}>Jogos hoje</a
 	>
 	<a
-		class={`px-4 py-2 rounded-full hover:shadow-gray-400 hover:shadow-inner ${boucingFX} ${buttonColorByRoute(
-			'/group-phase'
+		class={`px-4 py-2 rounded-full hover:shadow-gray-400 hover:shadow-inner $ ${btnColor(
+			'/matches/groups'
 		)}`}
-		href="/group-phase"
-		on:click={handleLinkClick}>Fase de grupo</a
+		href="/matches/groups"
+		on:click={() => handleLinkClick('/matches/groups')}>Fase de grupo</a
 	>
 </div>

@@ -1,9 +1,10 @@
 export interface Match {
 	matchId: number;
-	matchScoreA: number;
-	matchScoreB: number;
+	matchScoreA: number | null;
+	matchScoreB: number | null;
 	matchType: string;
 	matchDate: string;
+	formattedMatchDate: string;
 	teamIdA: number;
 	teamNameA: string;
 	teamTagA: string;
@@ -59,4 +60,10 @@ export interface RankingUser {
 	isMine: boolean;
 }
 
-export type PageLoadData<T> = { locals: CustomLocals; response: T; error?: unknown };
+export type PageLoadData<T> = { locals: CustomLocals; response: T; error?: unknown; url: string }; 
+
+export interface RemainingMatch {
+	name: string;
+	date: string;
+	matches: Match[];
+}

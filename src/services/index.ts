@@ -1,4 +1,4 @@
-import type { Bet, CustomUser, MatchesData, RankingUser } from '../types';
+import type { Bet, CustomUser, MatchesData, RankingUser, RemainingMatch } from '../types';
 
 type Method = 'GET' | 'POST' | 'PUT' | 'PATCH';
 const API_URL = 'https://world-cup-bets-service-production.up.railway.app';
@@ -61,6 +61,18 @@ export async function getMatchesWithBets(userId: string) {
 export async function getPlayerMatchesWithBets(userId: string, playerId: string) {
 	const { data, error } = await request<MatchesData>(
 		`${API_URL}/api/v1/matches?userId=${playerId}`,
+		'GET',
+		userId
+	);
+	if (error) {
+		throw error;
+	}
+	return data;
+}
+
+export async function getRemainingMatches(userId: string) {
+	const { data, error } = await request<RemainingMatch[]>(
+		`${API_URL}/api/v1/matches?status=remaining`,
 		'GET',
 		userId
 	);

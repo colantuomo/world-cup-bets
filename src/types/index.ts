@@ -60,7 +60,7 @@ export interface RankingUser {
 	isMine: boolean;
 }
 
-export type PageLoadData<T> = { locals: CustomLocals; response: T; error?: unknown; url: string }; 
+export type PageLoadData<T> = { locals: CustomLocals; response: T; error?: unknown; url?: string };
 
 export interface RemainingMatch {
 	name: string;

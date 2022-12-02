@@ -12,7 +12,11 @@
 	userStore.set({ userId: data.locals.userId, userName: data.locals.userName });
 
 	function getNameByGroupIndex(index: string) {
-		return Groups[index as GroupIndex].toString();
+		const groupName = Groups[index as GroupIndex];
+		if (groupName) {
+			return groupName.toString();
+		}
+		return index;
 	}
 
 	onMount(() => {

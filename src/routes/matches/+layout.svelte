@@ -15,7 +15,7 @@
 		return myPoints;
 	}
 
-    //TODO: use this store to create a visual feedback
+	//TODO: use this store to create a visual feedback
 	navigating.subscribe((state) => {
 		console.log('navigating: ', state);
 	});
@@ -26,7 +26,7 @@
 	<meta name="description" content="World Cup Bets App" />
 </svelte:head>
 
-<section class="container mx-auto px-4 md:w-4/5">
+<section class="container mx-auto">
 	<PageHeader
 		userName={data.locals.userName}
 		currentPoints={getMyCurrentTotalPoints(data.response) ?? 0}

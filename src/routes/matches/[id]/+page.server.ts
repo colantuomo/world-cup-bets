@@ -5,7 +5,7 @@ interface CustomServerLoadEvent extends ServerLoadEvent {
 	locals: CustomLocals;
 }
 
-export async function load({
+export function load({
 	locals,
 	params,
 	url
@@ -13,8 +13,7 @@ export async function load({
 	if (!locals.userId || !params?.id) {
 		throw redirect(302, '/login');
 	}
-	const response = await getPlayerMatchesWithBets(locals.userId, params?.id);
-	console.log(response);
+	const response = getPlayerMatchesWithBets(locals.userId, params?.id);
 	return {
 		locals,
 		response,

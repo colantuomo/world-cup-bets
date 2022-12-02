@@ -34,7 +34,7 @@
 	</h2>
 	<h3 class="text-md text-center text-gray-500">Meus pontos atuais: {currentPoints}</h3>
 </div>
-<div class="flex justify-between md:justify-center md:gap-8 py-4">
+<div class="flex justify-between md:justify-center md:gap-8 py-4 px-4 md:px-0">
 	<div class="flex gap-2">
 		<Button
 			{loading}

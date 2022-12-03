@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { initializeFirebase } from '../../lib/firebase';
 	import type { PageLoadData, RankingUser } from '../../types';
 	import logo from '$lib/images/logo.png';
 	import Button from '../../components/button.svelte';
@@ -7,14 +6,10 @@
 
 	export let data: PageLoadData<RankingUser[] | null>;
 	let loading: boolean;
-	let promise: Promise<{ data: RankingUser[] | null; error: any }>;
-	const { auth } = initializeFirebase();
-	function logOut() {
-		auth.signOut();
-	}
+
 	function navigateToOthersUsersBets(event: CustomEvent<{ userId: number; name: string }>) {
 		sessionStorage.setItem('rankingUserName', event.detail.name);
-		window.location.href = `/matches/${event.detail.userId}`;
+		window.location.href = `/users/${event.detail.userId}`;
 	}
 </script>
 
@@ -35,7 +30,7 @@
 						type="Secondary"
 						on:click={() => {
 							loading = true;
-							window.location.href = '/';
+							window.location.href = '/matches';
 						}}
 					/>
 				</div>

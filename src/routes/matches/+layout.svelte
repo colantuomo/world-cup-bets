@@ -1,7 +1,6 @@
 <script lang="ts">
 	import PageHeader from '../../components/pageHeader.svelte';
 	import type { MatchesData, PageLoadData } from '../../types';
-	import { navigating } from '$app/stores';
 
 	export let data: PageLoadData<MatchesData>;
 
@@ -14,11 +13,6 @@
 		});
 		return myPoints;
 	}
-
-	//TODO: use this store to create a visual feedback
-	navigating.subscribe((state) => {
-		console.log('navigating: ', state);
-	});
 </script>
 
 <svelte:head>

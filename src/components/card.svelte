@@ -24,6 +24,11 @@
 		});
 	}
 
+	function onFlagClicked(teamId: number) {
+		//TODO: change this to a dispatch event
+		window.location.href = `/matches/team/${teamId}`;
+	}
+
 	function getCardColorsByPoints() {
 		if (match.matchScoreA === null && match.matchScoreB === null)
 			return { bg: 'bg-gray-100', border: 'border-gray-200' };
@@ -56,15 +61,15 @@
 		</div>
 		<div class={`border-l-2 border-gray-300 ${border}`} />
 		<div class="flex justify-center text-center gap-2 flex-1">
-			<div>
+			<button on:click={() => onFlagClicked(match.teamIdA)}>
 				<img class="w-16" src={match.teamAvatarA} alt="team_a_flag" />
 				<p class="text-lg">{match.teamTagA}</p>
-			</div>
+			</button>
 			<p class="font-bold">X</p>
-			<div>
+			<button on:click={() => onFlagClicked(match.teamIdB)}>
 				<img class="w-16" src={match.teamAvatarB} alt="team_b_flag" />
 				<p class="text-lg">{match.teamTagB}</p>
-			</div>
+			</button>
 		</div>
 	</div>
 	<div class={`border-b-2 border-dotted w-full ${border}`} />

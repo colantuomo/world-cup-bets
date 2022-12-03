@@ -82,6 +82,18 @@ export async function getRemainingMatches(userId: string) {
 	return data;
 }
 
+export async function getTeamMatches(userId: string, teamId: string) {
+	const { data, error } = await request<RemainingMatch[]>(
+		`${API_URL}/api/v1/matches?teamId=${teamId}`,
+		'GET',
+		userId
+	);
+	if (error) {
+		throw error;
+	}
+	return data;
+}
+
 export async function saveBets(userId: string, bets: Bet[]) {
 	const { data, error } = await request<void>(`${API_URL}/api/v1/bets`, 'POST', userId, bets);
 	if (error) {

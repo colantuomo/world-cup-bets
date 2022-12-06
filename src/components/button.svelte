@@ -7,6 +7,7 @@
 	export let loading: boolean;
 	export let text: string;
 	export let type: keyof typeof ButtonTypes;
+	export let twclasses: string = '';
 
 	function chooseColorPalletByType() {
 		switch (type) {
@@ -24,7 +25,7 @@
 
 <button
 	disabled={loading}
-	class={`flex justify-center p-2 rounded-lg font-bold w-40 md:w-52 ${chooseColorPalletByType()}`}
+	class={`flex justify-center p-2 rounded-lg font-bold w-full md:w-52 ${twclasses} ${chooseColorPalletByType()}`}
 	on:click={onClick}
 >
 	{#if loading}

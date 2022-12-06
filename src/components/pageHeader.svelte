@@ -7,6 +7,7 @@
 
 	export let userName: string;
 	export let currentPoints: number;
+	export let canShowFilters: boolean = false;
 
 	let loading: boolean;
 	let currentRoute: string = '/matches';
@@ -34,8 +35,19 @@
 	</h2>
 	<h3 class="text-md text-center text-gray-500">Meus pontos atuais: {currentPoints}</h3>
 </div>
-<div class="flex justify-between md:justify-center md:gap-8 py-4 px-4 md:px-0">
-	<div class="flex gap-2">
+<div class="flex justify-between md:justify-center gap-4 text-sm md:gap-8 py-4 px-4 md:px-0">
+	<div class="flex gap-2 w-full">
+		{#if !canShowFilters}
+			<Button
+				{loading}
+				text="Home"
+				type="Secondary"
+				on:click={() => {
+					loading = true;
+					window.location.href = '/matches';
+				}}
+			/>
+		{/if}
 		<Button
 			{loading}
 			text="Ranking"
@@ -46,21 +58,29 @@
 			}}
 		/>
 	</div>
-	<Button loading={false} text="Logout" type="Secondary" on:click={logOut} />
+	<Button
+		loading={false}
+		text="Logout"
+		type="Secondary"
+		on:click={logOut}
+		twclasses="bg-transparent"
+	/>
 </div>
-<div class="flex gap-2 text-sm my-4 font-semibold px-4 md:p-0">
-	<a
-		class={`px-4 py-2 rounded-full hover:shadow-gray-400 hover:shadow-inner $ ${btnColor(
-			'/matches'
-		)}`}
-		href="/matches"
-		on:click={() => handleLinkClick('/matches')}>Jogos hoje</a
-	>
-	<a
-		class={`px-4 py-2 rounded-full hover:shadow-gray-400 hover:shadow-inner $ ${btnColor(
-			'/matches/groups'
-		)}`}
-		href="/matches/groups"
-		on:click={() => handleLinkClick('/matches/groups')}>Fase de grupo</a
-	>
-</div>
+{#if canShowFilters}
+	<div class="flex gap-2 text-sm my-4 font-semibold px-4 md:p-0">
+		<a
+			class={`px-4 py-2 rounded-full hover:shadow-gray-400 hover:shadow-inner $ ${btnColor(
+				'/matches'
+			)}`}
+			href="/matches"
+			on:click={() => handleLinkClick('/matches')}>Jogos hoje</a
+		>
+		<a
+			class={`px-4 py-2 rounded-full hover:shadow-gray-400 hover:shadow-inner $ ${btnColor(
+				'/matches/groups'
+			)}`}
+			href="/matches/groups"
+			on:click={() => handleLinkClick('/matches/groups')}>Fase de grupo</a
+		>
+	</div>
+{/if}

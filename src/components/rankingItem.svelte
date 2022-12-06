@@ -7,9 +7,12 @@
 	export let position: number;
 	export let isMine: boolean = false;
 
+	let loading: boolean = false;
+
 	const dispatch = createEventDispatcher();
 	function onClick() {
 		if (isMine) return;
+		loading = true;
 		dispatch('click', {
 			userId,
 			name
@@ -34,13 +37,13 @@
 <button on:click={onClick} class={`p-4 flex items-center gap-6 ${getColorsByPosition()}`}>
 	<div
 		class={`bg-gray-600 rounded-full w-10 h-10 p-5 text-white font-bold flex justify-center items-center ${
-			isMine && 'border-2 border-red-500'
+			loading ? 'animate-spin' : ''
 		}`}
 	>
 		{position}
 	</div>
-	<div class="flex items-center justify-between w-full">
-		<p class="text-md font-semibold">{name}</p>
+	<div class="flex items-center justify-between gap-4 w-full">
+		<p class={`text-md md:text-lg font-semibold`}>{name}</p>
 		<p class="text-3xl">{points}</p>
 	</div>
 </button>

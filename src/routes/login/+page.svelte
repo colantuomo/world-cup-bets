@@ -1,7 +1,7 @@
 <script lang="ts">
+	import IoLogoGoogle from 'svelte-icons/io/IoLogoGoogle.svelte';
 	import { initializeFirebase } from '$lib/firebase';
-	import logo from '$lib/images/catar-logo.png';
-	import Button from '../../components/button.svelte';
+	import logo from '$lib/images/logo.png';
 	import { createUser, getUser } from '../../services';
 	const { signInWithPopup, auth, googleProvider } = initializeFirebase();
 	let loading: boolean;
@@ -32,7 +32,18 @@
 	}
 </script>
 
-<div class="container mx-auto px-6 md:px-60 flex flex-col items-center">
-	<img class="w-96" alt="The project logo" src={logo} />
-	<Button on:click={login} {loading} text="Login with google" type="Primary" />
-</div>
+<svelte:head>
+	<title>World Cup Bets - Login</title>
+	<meta name="description" content="World Cup Bets App" />
+</svelte:head>
+
+<section class="h-screen flex justify-center flex-col items-center gap-11">
+	<img class="w-72" alt="The project logo" src={logo} />
+	<button
+		on:click={login}
+		class="bg-white flex gap-3 p-4 text-blue-500 font-semibold rounded-lg items-center border-blue-400 border-2"
+		>Entrar com google <div class={`w-8 ${loading ? 'animate-spin' : ''}`}>
+			<IoLogoGoogle />
+		</div></button
+	>
+</section>

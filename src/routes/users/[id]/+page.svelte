@@ -4,9 +4,12 @@
 	import GroupLabel from '../../../components/groupLabel.svelte';
 	import { Groups, type GroupIndex, type MatchesData, type PageLoadData } from '../../../types';
 	import { onMount } from 'svelte';
+	import { isABigUserName } from '../../../helpers/validations';
 
 	export let data: PageLoadData<MatchesData>;
+
 	const matches = data.response;
+	const BIG_USER_NAME_SIZE = 26;
 	let userName: string | null;
 
 	function getNameByGroupIndex(index: string) {
@@ -16,6 +19,8 @@
 		}
 		return index;
 	}
+
+	$: bigUserName = isABigUserName(userName ?? '');
 
 	onMount(() => {
 		userName = sessionStorage.getItem('rankingUserName');
@@ -29,7 +34,7 @@
 
 {#if data !== null}
 	<div class="bg-yellow-400 h-20 sticky top-0 flex gap-1 justify-center items-center flex-col z-20">
-		<div class="flex gap-1 text-sm md:text-base">
+		<div class={`flex gap-1 text-sm md:text-base ${bigUserName ? 'flex-col' : ''}`}>
 			<p>Você está vendo as apostas de:</p>
 			<p class="font-bold">{userName ?? ''}</p>
 		</div>

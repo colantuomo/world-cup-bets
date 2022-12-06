@@ -3,6 +3,8 @@
 	import type { MatchesData, PageLoadData } from '../../types';
 
 	export let data: PageLoadData<MatchesData>;
+	const routesWithPageHeader = ['/matches', '/matches/groups'];
+	$: isARouteWithPageHeader = () => routesWithPageHeader.includes(data.url ?? '');
 
 	function getMyCurrentTotalPoints(matches: MatchesData) {
 		if (!matches) return;
@@ -24,6 +26,7 @@
 	<PageHeader
 		userName={data.locals.userName}
 		currentPoints={getMyCurrentTotalPoints(data.response) ?? 0}
+		canShowFilters={isARouteWithPageHeader()}
 	/>
 	<slot />
 </section>

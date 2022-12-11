@@ -34,7 +34,7 @@
 	}
 </script>
 
-<button on:click={onClick} class={`p-4 flex items-center gap-6 ${getColorsByPosition()}`}>
+<button on:click={onClick} class={`p-4 text-left flex items-center gap-6 ${getColorsByPosition()}`}>
 	<div
 		class={`bg-gray-600 rounded-full w-10 h-10 p-5 text-white font-bold flex justify-center items-center ${
 			loading ? 'animate-spin' : ''

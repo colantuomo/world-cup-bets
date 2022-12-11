@@ -29,7 +29,7 @@
 	on:click={onClick}
 >
 	{#if loading}
-		<Moon size={24} color="black" />
+		<Moon size={20} color="black" />
 	{:else}
 		{text}
 	{/if}

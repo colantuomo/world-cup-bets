@@ -54,6 +54,11 @@
 </script>
 
 <div class={`flex flex-col rounded-sm border-solid border-2 w-80 hover:shadow-lg ${bg} ${border}`}>
+	<div
+		class="absolute bg-white p-4 rounded-full shadow-lg font-bold text-center w-12 h-12 flex justify-center items-center -ml-2 -mt-2 border-gray-100 border-2"
+	>
+		{match.totalPoints}
+	</div>
 	<div class="flex flex-1 p-6 justify-between gap-5">
 		<div class="flex-row text-center flex-1 justify-center items-center">
 			<p class="text-xl font-bold">{formatDate(new Date(match.matchDate)).day}</p>

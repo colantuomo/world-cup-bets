@@ -37,6 +37,8 @@
 				return { bg: 'bg-red-100', border: 'border-red-200' };
 			case 5:
 				return { bg: 'bg-green-100', border: 'border-green-200' };
+			case 7:
+				return { bg: 'bg-green-100', border: 'border-green-200' };
 			default:
 				return { bg: 'bg-yellow-100', border: 'border-yellow-200' };
 		}

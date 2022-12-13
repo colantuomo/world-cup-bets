@@ -25,7 +25,7 @@
 
 <button
 	disabled={loading}
-	class={`flex justify-center p-2 rounded-lg font-bold w-full md:w-52 ${twclasses} ${chooseColorPalletByType()}`}
+	class={`flex justify-center items-center p-2 rounded-lg font-bold w-full md:w-52 h-9 ${twclasses} ${chooseColorPalletByType()}`}
 	on:click={onClick}
 >
 	{#if loading}

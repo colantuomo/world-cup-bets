@@ -114,4 +114,4 @@ export const particlesConfig = {
 			}
 		}
 	]
-} as unknown;
+} as any;

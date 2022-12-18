@@ -40,6 +40,8 @@
 	"dependencies": {
 		"date-fns": "^2.29.3",
 		"firebase": "^9.14.0",
-		"svelte-icons": "^2.1.0"
+		"svelte-icons": "^2.1.0",
+		"svelte-particles": "^2.6.0",
+		"tsparticles": "^2.6.0"
 	}
 }

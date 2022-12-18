@@ -1,11 +1,22 @@
 <script lang="ts">
+	import Particles from 'svelte-particles';
+	import { loadFull } from 'tsparticles';
 	import type { PageLoadData, RankingUser } from '../../types';
 	import logo from '$lib/images/logo.png';
 	import Button from '../../components/button.svelte';
 	import RankingItem from '../../components/rankingItem.svelte';
+	import { particlesConfig } from './particlesOptions';
 
 	export let data: PageLoadData<RankingUser[] | null>;
 	let loading: boolean;
+
+	let onParticlesLoaded = (event: any) => {
+		const particlesContainer = event.detail.particles;
+	};
+
+	let particlesInit = async (engine: any) => {
+		await loadFull(engine);
+	};
 
 	function navigateToOthersUsersBets(event: CustomEvent<{ userId: number; name: string }>) {
 		sessionStorage.setItem('rankingUserName', event.detail.name);
@@ -17,6 +28,13 @@
 	<title>World Cup Bets - Ranking</title>
 	<meta name="description" content="World Cup Bets App" />
 </svelte:head>
+
+<Particles
+	id="tsparticles"
+	options={particlesConfig}
+	on:particlesLoaded={onParticlesLoaded}
+	{particlesInit}
+/>
 
 <div class="container mx-auto px-2 flex justify-center">
 	{#if data !== null && data.response !== null}
